@@ -51,6 +51,24 @@
 
 ---
 
+## ⚙️ 환경 설정 (Environment Requirements)
+
+대시보드의 원활한 실행과 데이터 시각화를 위해 아래와 같은 개발 환경을 권장합니다.
+
+- **OS:** Windows / macOS / Linux
+- **Python 버전:** `Python 3.10` 이상 권장
+- **필수 라이브러리 (requirements.txt):**
+  - `streamlit`
+  - `pandas`
+  - `numpy`
+  - `matplotlib`
+  - `seaborn`
+  - `Pillow`
+  - `openpyxl`
+  - `koreanize-matplotlib`
+
+---
+
 ## 📂 저장소 및 데이터 구조
 
 프로젝트를 실행하기 위해 구조는 다음과 같이 구성되어 있습니다:
