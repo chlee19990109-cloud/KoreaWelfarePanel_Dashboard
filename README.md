@@ -56,7 +56,7 @@
 대시보드의 원활한 실행과 데이터 시각화를 위해 아래와 같은 개발 환경을 권장합니다.
 
 - **OS:** Windows / macOS / Linux
-- **Python 버전:** `Python 3.10` 이상 권장
+- **Python 버전:** `Python 3.10`
 - **필수 라이브러리 (requirements.txt):**
   - `streamlit`
   - `pandas`
@@ -101,3 +101,4 @@ streamlit run app.py
 
 **3. 웹 브라우저에서 확인:**
 자동으로 브라우저가 실행되며, `http://localhost:8501` 이 열리면서 로컬에서도 대시보드를 직접 이용할 수 있습니다.
+
