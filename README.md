@@ -40,32 +40,68 @@
 
 ## 🛠 사용된 기술 및 주요 라이브러리 (Tech Stack)
 
-이 프로젝트는 Python을 이용하여 데이터 전처리 및 시각화를 진행하였으며, 웹 프레임워크로 Streamlit이 사용되었습니다.
+본 프로젝트는 Python 생태계를 기반으로 구축되었으며, 주요 데이터 처리부터 반응형 인터랙티브 UI 구성 및 시각화까지 다음의 세분화된 기술 스택을 활용합니다.
 
-- `streamlit`: 인터랙티브 웹 대시보드 구축 및 배포
-- `pandas` / `numpy`: 데이터 분석 및 전처리
-- `matplotlib` / `seaborn`: 기본 데이터 시각화 및 그래프 생성
-- `Pillow`: 웹 페이지 파비콘 및 이미지 처리
-- `openpyxl`: Excel 파일 읽기용 (`welfare_2015_codebook.xlsx`의 직종코드 매핑 지원)
-- `koreanize-matplotlib`: matplotlib 그래프의 한글 폰트 깨짐 방지 패키지
+### 🌐 Web Framework & UI
+- **[Streamlit](https://streamlit.io/)**: 
+  - `st.set_page_config`를 통한 페이지 메타데이터(타이틀, 파비콘) 및 Wide 레이아웃 설정
+  - `st.sidebar` 내 위젯(`selectbox`, `slider`, `multiselect`) 렌더링을 통한 동적 유저 인터랙션 및 필터링 기능 구현
+  - `@st.cache_data` 데코레이터를 이용한 원본 데이터 로드 시 성능 최적화(캐싱) 지원
+  - `st.columns` 기반의 그리드 레이아웃 분할로 데이터프레임과 분석 시각화 차트를 효율적으로 병렬 배치
+
+### 📊 Data Processing & Analysis
+- **[Pandas](https://pandas.pydata.org/)**: 
+  - `.csv` 및 `.xlsx` 등 다중 포맷 데이터 로드 및 데이터 병합(`merge`) 프로세스 수행
+  - 다수의 결측치 정제(`dropna`, `replace`), 조건부 람다 함수(또는 `apply`, `map`)를 통한 새 파생 변수 생성
+  - 고유한 집계 연산을 위한 그룹화(`groupby()`, `agg()`) 및 데이터 피벗(`pivot()`) 테이블 구축
+- **[NumPy](https://numpy.org/)**:
+  - `np.where()` 메서드를 이용한 강력한 조건부 값 치환 작업
+  - `np.nan`을 적용하여 무응답이나 알 수 없는 예외 값들에 대한 결측치 모델링의 일관성 유지
+
+### 📈 Data Visualization
+- **[Matplotlib](https://matplotlib.org/)**:
+  - 백엔드에서 `plt.subplots()`를 도출해 Figure 및 Axes 기반의 미시적이고 정교한 그래프 영역 제어
+  - 누적 막대 그래프(`stacked=True`), 개별 바(Bar) 수치 Label 표기용 주석(`ax.annotate`) 같은 디테일 렌더링
+- **[Seaborn](https://seaborn.pydata.org/)**:
+  - Matplotlib 위에서 동작하는 고수준 API로 복잡도를 줄이면서 직관적인 차트(`sns.barplot`, `sns.lineplot`) 도출
+  - `hue` 변수 및 다중 `order` 속성값 적용으로 여러 범주형 다변량 데이터의 추이를 직관적으로 비교 분석
+- **[koreanize_matplotlib](https://github.com/ychoi-kr/koreanize-matplotlib)**:
+  - 데이터 시각화 시 빈번히 발생하는 한글 폰트 깨짐 현상을 구동 중인 OS(Windows/Mac/Linux)에 구애받지 않고 자동으로 글로벌 방지 세팅
+
+### 🖼️ Media & File Handling
+- **[Pillow (PIL)](https://python-pillow.org/)**: 
+  - 앱 메인에 적용될 로컬 이미지 리소스(`sample.png`)를 읽고 변환하여 브라우저 내 파비콘 이미지로 브릿지 렌더링
+- **[openpyxl](https://openpyxl.readthedocs.io/)**:
+  - Pandas `read_excel()` 함수가 `.xlsx` 포맷의 범주형 코드북(직종코드)을 읽고 파싱할 수 있도록 지원하는 백엔드 코어 엔진 작동
 
 ---
 
-## ⚙️ 환경 설정 (Environment Requirements)
+## ⚙️ 환경 설정 및 필수 요구사항 (Environment Requirements)
 
-대시보드의 원활한 실행과 데이터 시각화를 위해 아래와 같은 개발 환경을 권장합니다.
+해당 대시보드의 원활한 코드 실행과 데이터 시각화를 구동하기 위해선 다음과 같은 로컬 환경 구축이 전제되어야 합니다.
 
-- **OS:** Windows / macOS / Linux
-- **Python 버전:** `Python 3.10`
-- **필수 라이브러리 (requirements.txt):**
-  - `streamlit`
-  - `pandas`
-  - `numpy`
-  - `matplotlib`
-  - `seaborn`
-  - `Pillow`
-  - `openpyxl`
-  - `koreanize-matplotlib`
+### 1. 시스템 요구사항
+- **OS**: Windows / macOS / Linux (크로스 플랫폼 지원)
+- **Python 환경**: `Python 3.8` 이상의 인터프리터 (버전 `3.10` 강력 권장)
+
+### 2. 패키지 의존성 (Dependencies)
+모듈 충돌 방지를 위해 독립된 가상환경(venv 등)을 세팅한 후, 로컬 터미널(프롬프트)에 접속해 아래 패키지들을 다운로드합니다. `requirements.txt` 파일 설치를 권장합니다.
+- **코어 모듈**: `streamlit`, `pandas`, `numpy`
+- **시각화 모듈**: `matplotlib`, `seaborn`, `koreanize-matplotlib`
+- **서포트 모듈**: `Pillow`, `openpyxl`
+
+```bash
+# 단일 명령어로 직접 전체 설치 시
+pip install streamlit pandas numpy matplotlib seaborn Pillow openpyxl koreanize-matplotlib
+```
+*(또는 `pip install -r requirements.txt` 명령어로 간편히 자동 의존성 설치 가능)*
+
+### 3. 디렉터리 및 필수 실행 에셋 구조
+로컬 저장소에서 오류 없이 앱이 구동되려면 시작 스크립트인 `app.py`와 같은 레벨의 작업(루트) 디렉터리 경로 내에 **아래 에셋 파일들이 전부 존재**해야 합니다.
+- `app.py`: Streamlit 대시보드의 전체 화면 구성, 시각화, 데이터 파이프라인 흐름을 제어하는 메인 실행 스크립트
+- `welfare_2015.csv`: 대시보드에서 전역으로 필터링 및 분석되는 **복지패널 분석용 원본 데이터** (사이드바 기본 파일 경로 매핑용 데이터)
+- `welfare_2015_codebook.xlsx`: 수치로 기록된 직업 코드(`job_code`) 등의 범주형 특성을 실제 한글 명칭으로 변환하기 위해 참조(`merge` 결합)하는 엑셀 기반 참조 코드북
+- `sample.png`: 웹 페이지 상단 브라우저 탭 아이콘(파비콘)에 고유하게 반영하기 위해 호출하는 초기 진입 이미지 파일
 
 ---
 
