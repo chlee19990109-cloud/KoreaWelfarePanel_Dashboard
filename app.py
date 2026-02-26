@@ -106,7 +106,7 @@ def load_welfare(sav_path: str):
 
 # 사이드바
 st.sidebar.title("데이터 로드")
-data_path = st.sidebar.text_input("데이터 파일 경로", value="data/welfare_2015.csv")
+data_path = st.sidebar.text_input("데이터 파일 경로", value="welfare_2015.csv")
 
 if st.sidebar.button("데이터 로드"):
     st.rerun()
@@ -586,3 +586,4 @@ with col2:
 
 
 # 끝
+
