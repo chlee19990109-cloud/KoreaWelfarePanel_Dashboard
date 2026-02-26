@@ -11,7 +11,7 @@ from PIL import Image
 # 3. 컬럼 레이아웃으로 주제별 시각화와 집계표(테이블) 나타내기
 
 # 웹 페이지 타이틀
-img = Image.open("image/sample.png")
+img = Image.open("sample.png")
 st.set_page_config(layout="wide", page_title="복지패널 데이터분석 시각화 대시보드", page_icon=img)
 
 # 한글 폰트 지정
@@ -583,5 +583,6 @@ with col2:
         st.write(region_age_group)
     else:
         st.write("변수 없음")
+
 
 # 끝
