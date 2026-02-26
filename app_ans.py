@@ -66,7 +66,7 @@ def load_welfare(sav_path: str):
             welfare["job_code"] == 9999, np.nan, welfare["job_code"]
         )
         job_list = pd.read_excel(
-            "data/welfare_2015_codebook.xlsx", sheet_name="직종코드"
+            "welfare_2015_codebook.xlsx", sheet_name="직종코드"
         )
         welfare = welfare.merge(job_list, how="left", on="job_code")
 
@@ -610,4 +610,5 @@ with col2:
 
 
 # 끝
+
 
