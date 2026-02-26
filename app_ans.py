@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from PIL import Image
+import koreanize_matplotlib
 
 # 웹 페이지 타이틀
 img = Image.open("sample.png")
@@ -12,10 +13,10 @@ st.set_page_config(
     layout="wide", page_title="복지패널 데이터분석 시각화 대시보드", page_icon=img
 )
 
-# 한글 폰트 지정
-plt.rc("font", family="Malgun Gothic")
-# 마이너스 기호 깨짐 방지
-plt.rcParams["axes.unicode_minus"] = False
+# # 한글 폰트 지정
+# plt.rc("font", family="Malgun Gothic")
+# # 마이너스 기호 깨짐 방지
+# plt.rcParams["axes.unicode_minus"] = False
 
 
 # 데이터 로드 함수
@@ -610,5 +611,6 @@ with col2:
 
 
 # 끝
+
 
 
